@@ -24,6 +24,7 @@
     </div>
 
     <script src="mirador/mirador.min.js"></script>
+    <script src="crop/plugin/mirador-plugin-imageManip.js"></script>
     <script src="https://rawgit.com/mejackreed/annotot/master/app/assets/javascripts/annotot/annotot_endpoint.js" type="text/javascript"></script>
     <script type="text/javascript">
 
@@ -37,6 +38,12 @@
            { manifestUri: "https://gist.githubusercontent.com/mejackreed/2a84eab914273f00114c10ee239b5aa5/raw/manifest.json", location: "Jack's gist"},
            { manifestUri: "http://dzkimgs.l.u-tokyo.ac.jp/iiif/zuzoubu/12b02/manifest.json", location: "University of Tokyo"},
          ],
+         windowSettings: {
+           availableViews : ['ThumbnailsView', 'ImageView', 'ScrollView', 'BookView'],
+           plugins : {
+              physicalRuler: true,
+              imageManip: { "plugin": 'imageManip', "label": 'imageEdit', showImageEdit: true }
+         } },
          windowObjects: [
            {
            loadedManifest: "http://dzkimgs.l.u-tokyo.ac.jp/iiif/zuzoubu/12b02/manifest.json",
@@ -44,10 +51,12 @@
            slotAddress: "row1.column1"
          }],
          annotationEndpoint: {
-           name:"Annotot",
-           module: "AnnototEndpoint",
+           name:"Simple Annotation Store Endpoint",
+           module: "SimpleASEndpoint",
            options: {
-             endpoint: "http://ras.scta.info/annotations"
+             url: "http://164.67.17.179:8888/annotation",
+             storeid: "comparison",
+             APIKey: 'user_auth'
            } }
        });
      });
